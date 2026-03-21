@@ -1,0 +1,11 @@
+<h2>Inventario de Insumos</h2>
+
+<button routerLink="/agregar">Agregar Insumo</button>
+
+<ul>
+  <li *ngFor="let insumo of insumos; let i = index">
+    {{ insumo.nombre }} - {{ insumo.cantidad }} {{ insumo.unidad }}
+    
+    <button (click)="eliminar(i)">Eliminar</button>
+  </li>
+</ul>
