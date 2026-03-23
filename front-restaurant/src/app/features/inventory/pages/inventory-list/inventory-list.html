@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary fw-bold">
+      📦 Gestión de Inventario
+    </h2>
+    <button class="btn btn-success shadow-sm" routerLink="/inventario/nuevo">
+      <i class="bi bi-plus-circle"></i> Nuevo Platillo
+    </button>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th class="ps-4">Producto</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th class="pe-4">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            @for (item of productos(); track item.id) {
+            <tr>
+              <td class="ps-4 fw-semibold">{{ item.nombre }}</td>
+              <td>
+                <span class="badge bg-info text-dark">{{ item.categoria }}</span>
+              </td>
+              <td>${{ item.precio }}</td>
+              <td>
+                <span class="badge" [ngClass]="item.stock > 20 ? 'bg-success' : 'bg-warning text-dark'">
+                  {{ item.stock }} unidades
+                </span>
+              </td>
+              <td class="pe-4">
+                <button class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/inventario/editar', item.id]">
+                  Editar
+                </button>
+                <button class="btn btn-sm btn-outline-danger">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+            } @empty {
+            <tr>
+              <td colspan="5" class="text-center text-muted py-5">
+                No hay productos registrados en el inventario.
+              </td>
+            </tr>
+            }
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
